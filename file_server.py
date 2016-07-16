@@ -190,6 +190,11 @@ def static(filename):
     Allows access to any file in the static directory
     '''
 
+    # Check if we're allowed to serve any files at all
+    if not app.config['static_root']:
+        raise bottle.HTTPError(status=404)
+
+    # Check if the file exists
     path = os.path.join(app.config['static_root'], filename)
     if not os.path.exists(path):
         raise bottle.HTTPError(status=404)
