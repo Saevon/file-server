@@ -240,43 +240,49 @@ app.config.update({
 
 
 from optparse import OptionParser
-app_parser = OptionParser(usage="usage: %prog [host] [options]")
+app_parser = OptionParser(usage="usage: %prog [options]")
 app_parser.add_option(
     "-p", "--port",
     dest="port",
+    help="Changes the port to listen to. To get a random port use 0",
 )
 app_parser.add_option(
     "-v", "--debug", "--verbose",
     dest="debug",
     action="store_true",
+    help="Enables debug messages",
+)
+app_parser.add_option(
+    "-q", "--quiet",
+    dest="debug",
+    action="store_false",
+    help="Disables debug and info messages",
 )
 app_parser.add_option(
     "-r", "--root",
     dest="static_root",
     action="store",
+    help="The folder to show to the user for download (downloading is disabled unless this option is passed in)",
 )
 app_parser.add_option(
     "-u",
     "--upload",
     dest="upload_path",
     action="store",
-    help="THe folder to save uploaded files (uploading is disabled unless this option is passed in",
-)
-app_parser.add_option(
-    "-q", "--quiet",
-    dest="debug",
-    action="store_false",
+    help="The folder to save uploaded files (uploading is disabled unless this option is passed in)",
 )
 app_parser.add_option(
     "--host",
     dest="host",
     action="store",
+    help="Sets the host to use (specific interace/IP to listen on)",
 )
 app_parser.add_option(
     "--open",
     dest="host",
     action="store_const",
     const="0.0.0.0",
+    help="Opens the server on all interfaces (this sets the `host` to 0.0.0.0)",
 )
 
 def parse_options():
@@ -285,10 +291,8 @@ def parse_options():
     '''
     (options, args) = app_parser.parse_args()
 
-    if len(args) > 1:
+    if len(args) > 0:
         app_parser.error("Too many arguments")
-    elif len(args) == 1:
-        app.config['host'] = args[0]
     elif options.host:
         app.config['host'] = options.host
 
