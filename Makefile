@@ -17,9 +17,15 @@ done:
 	@echo "File-server Setup Complete"
 
 
+
+COMPLETION_FILE=../completion.makefile
+ifneq ($(wildcard ${COMPLETION_FILE}),${COMPLETION_FILE})
 .PHONY: completion
 completion:
 	@ln -i -s ${PWD}/*.complete.bash ${HOME}/.bash_completion.d/ || true
+else
+include ${COMPLETION_FILE}
+endif
 
 
 
