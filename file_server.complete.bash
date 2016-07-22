@@ -2,8 +2,13 @@ __complete_file_server()
 {
     local cur prev opts
     COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    if [ "$(type -t _get_comp_words_by_ref)" == "function" ]; then
+         _get_comp_words_by_ref -n : cur prev
+    else
+        cur="${COMP_WORDS[COMP_CWORD]}"
+        prev="${COMP_WORDS[COMP_CWORD-1]}"
+    fi
+
     opts=
     opts+=" --host --open"
     opts+=" -h --help"
