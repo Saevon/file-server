@@ -9,7 +9,7 @@ all: main completion done
 main:
 	@echo "Setting up file-server"
 
-	@pip install -e .
+	@syspip install -e ${PWD}
 
 .PHONY: done
 done:
