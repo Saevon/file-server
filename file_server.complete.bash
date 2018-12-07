@@ -38,4 +38,4 @@ __complete_file_server()
         return 0
     fi
 }
-complete -F __complete_file_server file_server.py
+complete -F __complete_file_server file_server
