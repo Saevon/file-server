@@ -306,8 +306,7 @@ def parse_options():
 
     return options
 
-
-if __name__ == '__main__':
+def main():
     options = parse_options()
 
     app.config.update(options)
@@ -321,3 +320,7 @@ if __name__ == '__main__':
         })
 
     app.run(**app.config)
+
+
+if __name__ == '__main__':
+    main()
