@@ -24,6 +24,7 @@ ifneq ($(wildcard ${COMPLETION_FILE}),${COMPLETION_FILE})
 completion:
 	@ln -i -s ${PWD}/*.complete.bash ${HOME}/.bash_completion.d/ || true
 else
+include ../variables.makefile
 include ${COMPLETION_FILE}
 endif
 
